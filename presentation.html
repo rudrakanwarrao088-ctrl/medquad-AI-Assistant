@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedQuAD AI Assistant - Presentation Deck | Rashi Kanwar Rao</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .slide { display: none; }
+    .slide.active { display: flex; }
+    @media print {
+      body { background: white; }
+      .no-print { display: none !important; }
+      .slide { display: flex !important; page-break-after: always; min-height: 100vh; }
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between select-none">
+
+  <!-- Top Bar -->
+  <header class="no-print h-14 border-b border-slate-800 px-6 flex items-center justify-between bg-slate-900/60 backdrop-blur">
+    <div class="flex items-center gap-3">
+      <span class="w-7 h-7 rounded-lg bg-teal-600 text-white flex items-center justify-center font-bold text-sm">🩺</span>
+      <span class="text-xs font-semibold text-slate-300">MedQuAD AI Presentation Deck</span>
+      <span class="text-slate-600">•</span>
+      <span class="text-xs font-medium text-teal-400">Rashi Kanwar Rao</span>
+    </div>
+    <div class="flex items-center gap-3 text-xs">
+      <span id="slideCounter" class="text-slate-400 font-mono">Slide 1 of 10</span>
+      <button onclick="window.print()" class="px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
+        🖨️ Print / Save PDF
+      </button>
+      <button onclick="toggleFullscreen()" class="px-3 py-1 rounded bg-teal-600 hover:bg-teal-500 text-white font-medium transition">
+        ⛶ Fullscreen
+      </button>
+    </div>
+  </header>
+
+  <!-- Slide Canvas Container -->
+  <main class="flex-1 max-w-6xl w-full mx-auto p-6 sm:p-10 flex items-center justify-center">
+
+    <!-- SLIDE 1: Title Slide -->
+    <div class="slide active flex-col justify-center items-start w-full bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-10 sm:p-16 shadow-2xl relative overflow-hidden">
+      <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-teal-600/10 rounded-full blur-3xl pointer-events-none"></div>
+      <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-500/10 text-teal-400 border border-teal-500/20 mb-6">
+        EVIDENCE-BASED HEALTHCARE AI SYSTEM
+      </span>
+      <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-4 leading-tight">
+        MedQuAD AI Medical Assistant
+      </h1>
+      <p class="text-lg sm:text-xl text-slate-400 max-w-3xl mb-10 leading-relaxed font-normal">
+        Clinical Question Answering, Disease Exploration & Diagnostic Knowledge Retrieval powered by National Institutes of Health (NIH) verified data.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-xl">
+        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-4">
+          <p class="text-xs text-slate-400">Presented By</p>
+          <p class="text-xl font-bold text-white mt-1">Rashi Kanwar Rao</p>
+          <p class="text-xs text-teal-400 mt-0.5 font-medium">Lead Developer & Healthcare AI Researcher</p>
+        </div>
+        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-4">
+          <p class="text-xs text-slate-400">Knowledge Benchmark</p>
+          <p class="text-xl font-bold text-white mt-1">NIH MedQuAD</p>
+          <p class="text-xs text-slate-400 mt-0.5">16,359+ Q&A Pairs | 5,126 Conditions</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: Problem Statement -->
+    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 sm:p-14 shadow-2xl">
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-2">PROJECT MOTIVATION</span>
+      <h2 class="text-3xl font-extrabold text-white mb-8">The Healthcare Information Challenge</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 space-y-3">
+          <h3 class="text-lg font-bold text-rose-400 flex items-center gap-2"><span>⚠️</span> Current Pain Points</h3>
+          <ul class="space-y-2 text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <li>• <strong>Misinformation Risks:</strong> Generic web search engines frequently display unverified, sensationalized health advice.</li>
+            <li>• <strong>Dense Jargon:</strong> Clinical literature uses terms like <em>dyspnea</em> and <em>edema</em> that create cognitive barriers for patients.</li>
+            <li>• <strong>Diagnostic Anxiety:</strong> Misinterpreted health articles induce unnecessary panic and delay professional consultations.</li>
+            <li>• <strong>No Provenance:</strong> Public health content rarely attributes specific research institutes or studies.</li>
+          </ul>
+        </div>
+        <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 space-y-3">
+          <h3 class="text-lg font-bold text-teal-400 flex items-center gap-2"><span>💡</span> The MedQuAD AI Solution</h3>
+          <ul class="space-y-2 text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <li>• <strong>NIH-Verified Ground Truth:</strong> Grounded exclusively in peer-reviewed clinical data from 12 official NIH resources.</li>
+            <li>• <strong>Hybrid Retrieval Engine:</strong> Sublinear TF-IDF + Cosine Similarity with pathological entity boosting.</li>
+            <li>• <strong>Patient-Centered NLP Layer:</strong> Synthesizes actionable bulleted takeaways and plain-English medical glossaries.</li>
+            <li>• <strong>Clinical Safety First:</strong> Transparent similarity confidence scores and prominent HIPAA/medical disclaimers.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: Dataset Architecture -->
+    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 sm:p-14 shadow-2xl">
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-2">BENCHMARK DATA</span>
+      <h2 class="text-3xl font-extrabold text-white mb-6">MedQuAD Dataset & Institutional Provenance</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+        <div class="bg-teal-950/40 border border-teal-800/50 p-4 rounded-xl text-center">
+          <p class="text-2xl font-extrabold text-teal-400">16,359+</p>
+          <p class="text-xs text-slate-400 mt-1">Curated Q&As</p>
+        </div>
+        <div class="bg-sky-950/40 border border-sky-800/50 p-4 rounded-xl text-center">
+          <p class="text-2xl font-extrabold text-sky-400">5,126</p>
+          <p class="text-xs text-slate-400 mt-1">Medical Diseases</p>
+        </div>
+        <div class="bg-indigo-950/40 border border-indigo-800/50 p-4 rounded-xl text-center">
+          <p class="text-2xl font-extrabold text-indigo-400">9</p>
+          <p class="text-xs text-slate-400 mt-1">NIH Institutes</p>
+        </div>
+        <div class="bg-emerald-950/40 border border-emerald-800/50 p-4 rounded-xl text-center">
+          <p class="text-2xl font-extrabold text-emerald-400">132 Words</p>
+          <p class="text-xs text-slate-400 mt-1">Avg Response Depth</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-slate-800/40 border border-slate-700 rounded-xl p-5">
+          <h4 class="text-sm font-bold text-white mb-2">🏛️ Contributing Institutes</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            MedlinePlus (NLM), National Cancer Institute (Cancer.gov), Centers for Disease Control and Prevention (CDC), NIDDK (Diabetes & Kidney), NINDS (Neurological Disorders), GARD (Rare Diseases), NHLBI (Heart & Lung).
+          </p>
+        </div>
+        <div class="bg-slate-800/40 border border-slate-700 rounded-xl p-5">
+          <h4 class="text-sm font-bold text-white mb-2">🏷️ Question Typologies</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Symptoms & Signs, Treatment & Therapeutics, Causes & Risk Factors, Diagnosis & Diagnostic Testing, Prognosis & Clinical Outlook, and General Medical Inquiries.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: System Architecture -->
+    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 sm:p-14 shadow-2xl">
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-2">TECHNICAL PIPELINE</span>
+      <h2 class="text-3xl font-extrabold text-white mb-6">Multi-Tier System Architecture</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+        <div class="bg-slate-800/60 border border-slate-700 rounded-2xl p-5 space-y-2">
+          <span class="w-7 h-7 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center text-xs font-bold">1</span>
+          <h4 class="text-sm font-bold text-white">Data Ingestion</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Auto-discovers CSV, handles UTF-8/Latin-1 encoding fallbacks, dynamic column mapping, and deduplication.
+          </p>
+        </div>
+        <div class="bg-slate-800/60 border border-slate-700 rounded-2xl p-5 space-y-2">
+          <span class="w-7 h-7 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-xs font-bold">2</span>
+          <h4 class="text-sm font-bold text-white">TF-IDF Indexing</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Builds sublinear TF-IDF vector space with (1,2) n-grams and 50,000 clinical vocabulary features.
+          </p>
+        </div>
+        <div class="bg-slate-800/60 border border-slate-700 rounded-2xl p-5 space-y-2">
+          <span class="w-7 h-7 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs font-bold">3</span>
+          <h4 class="text-sm font-bold text-white">Hybrid Retrieval</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Cosine similarity matching with +8% domain entity boosting on target diseases and condition filtering.
+          </p>
+        </div>
+        <div class="bg-slate-800/60 border border-slate-700 rounded-2xl p-5 space-y-2">
+          <span class="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold">4</span>
+          <h4 class="text-sm font-bold text-white">Delivery Layer</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Streamlit reactive web application, client-side HTML dashboard, takeaway extractor, and glossary.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: Algorithms & Mathematics -->
+    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 sm:p-14 shadow-2xl">
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-2">INFORMATION RETRIEVAL</span>
+      <h2 class="text-3xl font-extrabold text-white mb-6">Mathematical Formulation & Ranking</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 space-y-3">
+          <h3 class="text-base font-bold text-teal-400">📐 Sublinear TF-IDF Formulation</h3>
+          <p class="text-xs text-slate-300 leading-relaxed font-mono bg-slate-950 p-3 rounded-lg border border-slate-800">
+            tf_sub(t, d) = 1 + log(tf(t, d)) if tf > 0, else 0<br>
+            idf(t) = log((1 + N) / (1 + df(t))) + 1
+          </p>
+          <ul class="text-xs text-slate-400 space-y-1.5 pt-1">
+            <li>• Sublinear frequency prevents long medical texts from falsely dominating.</li>
+            <li>• N-gram windowing (1, 2) accurately indexes terms like <em>"blood pressure"</em>.</li>
+          </ul>
+        </div>
+        <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 space-y-3">
+          <h3 class="text-base font-bold text-sky-400">🎯 Cosine Projection & Boosting</h3>
+          <p class="text-xs text-slate-300 leading-relaxed font-mono bg-slate-950 p-3 rounded-lg border border-slate-800">
+            CosineSim(Q, D) = (Q · D) / (||Q|| · ||D||)<br>
+            Score(d) = CosineSim(Q, D) + α · EntityMatch(Q, Focus_d)
+          </p>
+          <ul class="text-xs text-slate-400 space-y-1.5 pt-1">
+            <li>• Evaluates directional angle in high-dimensional sparse vector space.</li>
+            <li>• Empirical boost factor α = 0.08 prioritizes direct disease matches.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: Core Features -->
+    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 sm:p-14 shadow-2xl">
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-2">CLINICAL INTELLIGENCE</span>
+      <h2 class="text-3xl font-extrabold text-white mb-6">Key System Features</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-5 space-y-1.5">
+          <h4 class="text-sm font-bold text-teal-300 flex items-center gap-1.5"><span>🩺</span> Natural Language Search</h4>
+          <p class="text-xs text-slate-300">Instant query execution across 16,000+ records with color-coded confidence match percentages.</p>
+        </div>
+        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-5 space-y-1.5">
+          <h4 class="text-sm font-bold text-sky-300 flex items-center gap-1.5"><span>📌</span> Automated Takeaway Extractor</h4>
+          <p class="text-xs text-slate-300">Heuristically evaluates sentence importance to synthesize concise clinical bullet points.</p>
+        </div>
+        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-5 space-y-1.5">
+          <h4 class="text-sm font-bold text-indigo-300 flex items-center gap-1.5"><span>📖</span> Jargon Simplifier</h4>
+          <p class="text-xs text-slate-300">Automatically translates medical terminology (e.g. <em>dyspnea</em>, <em>hypertension</em>) into plain English.</p>
+        </div>
+        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-5 space-y-1.5">
+          <h4 class="text-sm font-bold text-emerald-300 flex items-center gap-1.5"><span>🔍</span> Disease & Topic Explorer</h4>
+          <p class="text-xs text-slate-300">Structured condition browser across 5,126 diseases with symptom, diagnosis, and treatment cards.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: UI & Dashboard -->
+    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 sm:p-14 shadow-2xl">
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-2">USER EXPERIENCE</span>
+      <h2 class="text-3xl font-extrabold text-white mb-6">User Interface & Dashboard Design</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 space-y-3">
+          <h3 class="text-sm font-bold text-teal-400">💻 Application Interface</h3>
+          <ul class="text-xs sm:text-sm text-slate-300 space-y-2">
+            <li>• <strong>Reactive Streamlit Frontend:</strong> Instant query results with in-memory caching and state management.</li>
+            <li>• <strong>Prompt Suggestion Pills:</strong> 1-click test buttons for Diabetes, Asthma, Glaucoma, and Hypertension.</li>
+            <li>• <strong>Interactive Sidebar:</strong> Sliders for result counts (1-15) and confidence threshold cutoffs.</li>
+          </ul>
+        </div>
+        <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 space-y-3">
+          <h3 class="text-sm font-bold text-sky-400">🎨 Clinical Design System</h3>
+          <ul class="text-xs sm:text-sm text-slate-300 space-y-2">
+            <li>• <strong>Trustworthy Healthcare Palette:</strong> Teal (#0d9488), deep navy (#0f172a), and high-contrast card elevation.</li>
+            <li>• <strong>Classification Badges:</strong> Immediate visual labels for match score, condition, category, and source.</li>
+            <li>• <strong>Safety Disclaimers:</strong> Prominent clinical guidance and educational notices for responsible AI use.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: Analytics & EDA -->
+    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 sm:p-14 shadow-2xl">
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-2">EXPLORATORY DATA ANALYSIS</span>
+      <h2 class="text-3xl font-extrabold text-white mb-6">Dataset Analytics & Exploratory Insights</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 space-y-2.5">
+          <h3 class="text-sm font-bold text-teal-400">📊 Quantitative Insights</h3>
+          <ul class="text-xs sm:text-sm text-slate-300 space-y-2">
+            <li>• <strong>Top Documented Conditions:</strong> Breast cancer, Diabetes, Asthma, Glaucoma, Hypertension, and Parkinson's.</li>
+            <li>• <strong>Deep Explanations:</strong> Average answer length of 132 words ensures comprehensive medical guidance.</li>
+            <li>• <strong>Broad Institutional Representation:</strong> Balances specialty oncology (NCI) with primary care (MedlinePlus, CDC).</li>
+          </ul>
+        </div>
+        <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 space-y-2.5">
+          <h3 class="text-sm font-bold text-sky-400">📥 Research & Export Capabilities</h3>
+          <ul class="text-xs sm:text-sm text-slate-300 space-y-2">
+            <li>• <strong>Interactive Distribution Charts:</strong> Altair graphs visualizing question categories and sources.</li>
+            <li>• <strong>Searchable Raw Data Table:</strong> In-app keyword search across all 16,359 pairs.</li>
+            <li>• <strong>One-Click CSV Export:</strong> Filtered subsets downloadable directly for downstream analysis.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 9: DevOps & Deployment -->
+    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 sm:p-14 shadow-2xl">
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-2">DEPLOYMENT & DEVOPS</span>
+      <h2 class="text-3xl font-extrabold text-white mb-6">Cloud Infrastructure & Production Readiness</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-5 space-y-2">
+          <h4 class="text-sm font-bold text-teal-400">☁️ Streamlit Cloud</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">Direct continuous deployment from GitHub with automated SSL certificates and public URL hosting.</p>
+        </div>
+        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-5 space-y-2">
+          <h4 class="text-sm font-bold text-sky-400">🐳 Docker Container</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">Lean Python 3.11-slim container with health check probes for AWS, GCP, Azure, or Kubernetes clusters.</p>
+        </div>
+        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-5 space-y-2">
+          <h4 class="text-sm font-bold text-indigo-400">🔄 CI/CD & Testing</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">Unit test suite (<code class="text-teal-400">test_pipeline.py</code>) validating normalization, ranking, and takeaway extraction.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 10: Conclusion -->
+    <div class="slide flex-col justify-center items-start w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 sm:p-14 shadow-2xl relative overflow-hidden">
+      <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-500/10 text-teal-400 border border-teal-500/20 mb-4">
+        CONCLUSION & FUTURE SCOPE
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-6">Summary of Achievements</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mb-8">
+        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-5 space-y-2">
+          <h4 class="text-sm font-bold text-teal-400">🏆 Key Achievements</h4>
+          <ul class="text-xs text-slate-300 space-y-1.5">
+            <li>✓ Built full-stack Healthcare QA Assistant over 16,000+ NIH records.</li>
+            <li>✓ Sub-second hybrid TF-IDF retrieval with clinical entity boosting.</li>
+            <li>✓ Automated takeaway bullet extractor and medical glossary.</li>
+            <li>✓ Published to GitHub with container and cloud deployment configs.</li>
+          </ul>
+        </div>
+        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-5 space-y-2">
+          <h4 class="text-sm font-bold text-sky-400">🔮 Future Roadmap</h4>
+          <ul class="text-xs text-slate-300 space-y-1.5">
+            <li>→ Dense neural embeddings using BioBERT and ClinicalBERT.</li>
+            <li>→ Voice-to-text dictation and speech synthesis for accessibility.</li>
+            <li>→ Multi-lingual clinical translation for diverse patient groups.</li>
+            <li>→ Electronic Health Record (EHR / FHIR) interoperability.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between w-full pt-4 border-t border-slate-800">
+        <div>
+          <p class="text-base font-bold text-white">Thank You! Questions & Discussion</p>
+          <p class="text-xs text-teal-400">Presented by Rashi Kanwar Rao</p>
+        </div>
+        <a href="https://github.com/rudrakanwarrao-088-ctrl/medquad-AI-Assistant" target="_blank" class="px-4 py-2 rounded-xl text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white transition">
+          View GitHub Repository ↗
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Bottom Navigation Controls -->
+  <footer class="no-print h-16 border-t border-slate-800 px-6 flex items-center justify-between bg-slate-900/60 backdrop-blur">
+    <div class="flex items-center gap-2">
+      <button id="prevBtn" onclick="prevSlide()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
+        ← Previous Slide
+      </button>
+      <button id="nextBtn" onclick="nextSlide()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-teal-600 hover:bg-teal-500 text-white transition">
+        Next Slide →
+      </button>
+    </div>
+    <div class="text-xs text-slate-500 hidden sm:block">
+      Tip: Use <kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">←</kbd> and <kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">→</kbd> arrow keys to navigate
+    </div>
+  </footer>
+
+  <script>
+    const slides = document.querySelectorAll(".slide");
+    const counter = document.getElementById("slideCounter");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    let currentIdx = 0;
+
+    function updateSlide(idx) {
+      if (idx < 0) idx = 0;
+      if (idx >= slides.length) idx = slides.length - 1;
+      currentIdx = idx;
+
+      slides.forEach((s, i) => {
+        s.classList.toggle("active", i === currentIdx);
+      });
+
+      counter.textContent = `Slide ${currentIdx + 1} of ${slides.length}`;
+      prevBtn.disabled = currentIdx === 0;
+      prevBtn.classList.toggle("opacity-50", currentIdx === 0);
+      nextBtn.disabled = currentIdx === slides.length - 1;
+      nextBtn.classList.toggle("opacity-50", currentIdx === slides.length - 1);
+    }
+
+    function prevSlide() { updateSlide(currentIdx - 1); }
+    function nextSlide() { updateSlide(currentIdx + 1); }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft" || e.key === "PageUp") prevSlide();
+      if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") nextSlide();
+    });
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => console.log(err));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    updateSlide(0);
+  </script>
+</body>
+</html>
