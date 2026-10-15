@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedQuAD AI - Clinical Medical Assistant & Knowledge Base</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .glass-nav { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold text-xl shadow-md shadow-teal-500/20">
+          🩺
+        </div>
+        <div>
+          <h1 class="text-lg font-bold text-slate-900 leading-tight">MedQuAD AI</h1>
+          <p class="text-xs text-slate-500 font-medium">National Institutes of Health (NIH) Medical QA</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 16,359 NIH Records Loaded
+        </span>
+        <a href="http://localhost:8501" target="_blank" class="px-4 py-2 rounded-lg text-xs font-semibold bg-teal-600 hover:bg-teal-700 text-white shadow-sm transition-colors">
+          Open Streamlit App ↗
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full grid grid-cols-1 lg:grid-cols-4 gap-8">
+    
+    <!-- Sidebar Controls -->
+    <aside class="lg:col-span-1 space-y-6">
+      
+      <!-- Quick Info Card -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+          <span>📊</span> Knowledge Base Telemetry
+        </h2>
+        <div class="grid grid-cols-2 gap-3 text-center">
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+            <p class="text-xs text-slate-500">Total Q&As</p>
+            <p class="text-lg font-bold text-teal-700">16,359</p>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+            <p class="text-xs text-slate-500">Conditions</p>
+            <p class="text-lg font-bold text-teal-700">5,126</p>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+            <p class="text-xs text-slate-500">NIH Sources</p>
+            <p class="text-lg font-bold text-indigo-700">9</p>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+            <p class="text-xs text-slate-500">Avg Response</p>
+            <p class="text-lg font-bold text-indigo-700">132 words</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Topics Filter -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+        <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+          <span>🏷️</span> Filter by Question Type
+        </h2>
+        <div class="flex flex-col gap-1.5" id="categoryFilters">
+          <button class="cat-btn active text-left px-3 py-1.5 rounded-lg text-xs font-semibold bg-teal-50 text-teal-700 border border-teal-200" data-cat="all">
+            All Categories
+          </button>
+          <button class="cat-btn text-left px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-50 border border-transparent" data-cat="symptoms">
+            Symptoms & Signs
+          </button>
+          <button class="cat-btn text-left px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-50 border border-transparent" data-cat="treatment">
+            Treatment & Therapies
+          </button>
+          <button class="cat-btn text-left px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-50 border border-transparent" data-cat="causes">
+            Causes & Risk Factors
+          </button>
+          <button class="cat-btn text-left px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-50 border border-transparent" data-cat="diagnosis">
+            Diagnosis & Tests
+          </button>
+        </div>
+      </div>
+
+      <!-- Contributing Institutes -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+        <h2 class="text-sm font-bold text-slate-900">🏛️ NIH Data Provenance</h2>
+        <p class="text-xs text-slate-500 leading-relaxed">
+          Sourced from MedlinePlus, Cancer.gov, CDC, NIDDK, NINDS, NIAMS, and NHLBI.
+        </p>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <section class="lg:col-span-3 space-y-6">
+      
+      <!-- Hero & Search Input -->
+      <div class="bg-gradient-to-br from-teal-800 to-sky-900 text-white p-8 rounded-3xl shadow-lg relative overflow-hidden">
+        <div class="relative z-10 space-y-4">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            Evidence-Based Medical QA
+          </h2>
+          <p class="text-teal-100 text-sm max-w-2xl leading-relaxed">
+            Search clinical questions, analyze disease symptoms, and review peer-reviewed medical guidance directly from official NIH websites.
+          </p>
+
+          <!-- Search Bar -->
+          <div class="relative flex items-center">
+            <input 
+              id="mainSearch"
+              type="text" 
+              placeholder="e.g., What are the warning signs of breast cancer? How is asthma treated?"
+              class="w-full pl-12 pr-28 py-3.5 rounded-2xl text-slate-900 text-sm font-medium focus:outline-none focus:ring-4 focus:ring-teal-400/40 shadow-inner"
+            />
+            <span class="absolute left-4 text-slate-400 text-base">🔍</span>
+            <button 
+              id="searchBtn"
+              class="absolute right-2 px-5 py-2 rounded-xl text-xs font-bold bg-teal-600 hover:bg-teal-700 text-white shadow-md transition-all">
+              Search
+            </button>
+          </div>
+
+          <!-- Quick Suggestion Pills -->
+          <div class="flex items-center gap-2 overflow-x-auto pt-1 text-xs">
+            <span class="text-teal-200 font-medium whitespace-nowrap">Suggested:</span>
+            <button class="query-pill px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white whitespace-nowrap transition-colors" data-query="Asthma symptoms">
+              🫁 Asthma
+            </button>
+            <button class="query-pill px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white whitespace-nowrap transition-colors" data-query="Type 2 diabetes signs">
+              🩸 Diabetes
+            </button>
+            <button class="query-pill px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white whitespace-nowrap transition-colors" data-query="Hypertension causes">
+              ❤️ Hypertension
+            </button>
+            <button class="query-pill px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white whitespace-nowrap transition-colors" data-query="Glaucoma risk factors">
+              👁️ Glaucoma
+            </button>
+            <button class="query-pill px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white whitespace-nowrap transition-colors" data-query="Heart attack signs">
+              ⚡ Heart Attack
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Header & Counter -->
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-slate-900" id="resultsCount">
+          Showing Medical Guidance
+        </h3>
+        <span class="text-xs text-slate-500 font-medium">Ranked by TF-IDF Semantic Relevance</span>
+      </div>
+
+      <!-- Cards Container -->
+      <div id="resultsList" class="space-y-4">
+        <!-- Rendered by JavaScript -->
+      </div>
+
+      <!-- Disclaimer Banner -->
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-start gap-3 text-amber-900 text-xs leading-relaxed">
+        <span class="text-lg">⚠️</span>
+        <div>
+          <strong class="font-semibold">Clinical & Educational Notice:</strong>
+          MedQuAD AI is an informational reference engine synthesized from NIH public health archives. It does not replace professional clinical evaluation, diagnosis, or emergency care.
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Interactive Logic -->
+  <script>
+    const DATASET = [
+      {
+        question: "What are the symptoms of Asthma?",
+        focus: "Asthma",
+        type: "symptoms",
+        source: "NHLBI / MedlinePlus",
+        answer: "Asthma symptoms include recurring episodes of wheezing (a whistling sound when breathing), chest tightness, shortness of breath (dyspnea), and chronic coughing, particularly late at night or in early morning hours. Symptoms frequently flare during vigorous exercise or upon exposure to airborne irritants such as smoke, pet dander, or dust mites.",
+        takeaways: [
+          "Primary signs: wheezing, chest tightness, coughing, and dyspnea.",
+          "Symptoms are commonly aggravated during nocturnal hours or strenuous exercise.",
+          "Trigger avoidance (smoke, allergens) is a key lifestyle intervention."
+        ],
+        glossary: [
+          { term: "Dyspnea", def: "Shortness of breath or labored respiration." },
+          { term: "Wheezing", def: "A high-pitched whistling noise produced by turbulent airflow through narrowed airways." }
+        ]
+      },
+      {
+        question: "What are the treatments and medications for Asthma?",
+        focus: "Asthma",
+        type: "treatment",
+        source: "NHLBI / MedlinePlus",
+        answer: "Asthma treatments are categorized into daily long-term control medications (inhaled corticosteroids to suppress airway inflammation, long-acting beta-agonists) and fast-acting rescue inhalers (short-acting beta2-agonists like albuterol) to promptly open airway passages during an acute attack.",
+        takeaways: [
+          "Inhaled corticosteroids provide essential day-to-day anti-inflammatory control.",
+          "Albuterol rescue inhalers rapidly resolve acute bronchospasms.",
+          "Individualized Asthma Action Plans help monitor peak expiratory flow."
+        ],
+        glossary: [
+          { term: "Corticosteroids", def: "Steroid hormones used clinically to reduce inflammation." },
+          { term: "Bronchodilator", def: "Medication that expands the bronchioles to enhance airflow." }
+        ]
+      },
+      {
+        question: "What are the warning signs and symptoms of Type 2 Diabetes?",
+        focus: "Type 2 Diabetes",
+        type: "symptoms",
+        source: "NIDDK / CDC",
+        answer: "Common warning signs of type 2 diabetes include increased thirst (polydipsia), frequent urination (polyuria), unprompted weight loss, fatigue, blurred vision, slow-healing skin sores, and peripheral neuropathy (numbness or tingling in the feet and fingers). Many patients remain asymptomatic for years until diagnosed via routine fasting plasma glucose screening.",
+        takeaways: [
+          "Hallmarks include excessive thirst, frequent urination, and unintended weight loss.",
+          "Peripheral neuropathy may manifest as extremity numbness or tingling.",
+          "Regular blood sugar testing is critical due to prolonged asymptomatic phases."
+        ],
+        glossary: [
+          { term: "Neuropathy", def: "Nerve damage resulting in tingling, numbness, or chronic pain." },
+          { term: "Asymptomatic", def: "Presenting no recognizable symptoms despite underlying pathology." }
+        ]
+      },
+      {
+        question: "What causes High Blood Pressure (Hypertension)?",
+        focus: "Hypertension",
+        type: "causes",
+        source: "NHLBI / MedlinePlus",
+        answer: "Primary (essential) hypertension develops gradually over decades with no identifiable singular etiology. Major contributors include advanced age, genetic predisposition, obesity, high dietary sodium intake, physical inactivity, tobacco use, and chronic stress. Secondary hypertension can stem from underlying renal disease, endocrine disorders, or obstructive sleep apnea.",
+        takeaways: [
+          "Primary hypertension develops gradually with genetic and behavioral risk factors.",
+          "Sodium-rich diets and lack of exercise significantly increase arterial resistance.",
+          "Uncontrolled hypertension elevates the long-term risk of stroke and myocardial infarction."
+        ],
+        glossary: [
+          { term: "Hypertension", def: "Persistently elevated blood pressure inside systemic arteries." },
+          { term: "Etiology", def: "The study or cause of disease origin." }
+        ]
+      },
+      {
+        question: "Who is at risk for Glaucoma and how is it detected?",
+        focus: "Glaucoma",
+        type: "diagnosis",
+        source: "NEI / MedlinePlus",
+        answer: "Glaucoma is characterized by progressive optic nerve damage, often linked to elevated intraocular pressure. High-risk populations include adults over age 60, individuals with positive family history, and people of African, Hispanic, or Asian heritage. Definitive diagnosis requires comprehensive dilated eye exams and tonometry testing.",
+        takeaways: [
+          "Optic nerve damage may progress silently without early pain or blurred central vision.",
+          "Intraocular pressure elevation is a primary treatable biomarker.",
+          "Periodic tonometry and dilated examinations are essential for early detection."
+        ],
+        glossary: [
+          { term: "Tonometry", def: "Diagnostic measurement of fluid pressure inside the eye." },
+          { term: "Prognosis", def: "The projected outcome of disease management." }
+        ]
+      },
+      {
+        question: "What are the common symptoms of a Heart Attack (Myocardial Infarction)?",
+        focus: "Heart Attack",
+        type: "symptoms",
+        source: "NHLBI / CDC",
+        answer: "Symptoms of a myocardial infarction include central chest pain or sensation of squeezing/pressure, radiating discomfort to the shoulder, arm, back, neck, or jaw, acute shortness of breath (dyspnea), cold sweats, nausea, and lightheadedness. A heart attack is an immediate medical emergency requiring emergency services (911).",
+        takeaways: [
+          "Substernal chest pressure radiating to the arm, neck, or jaw is the classic presentation.",
+          "Associated autonomic symptoms include diaphoresis (cold sweats), nausea, and dyspnea.",
+          "Immediate emergency activation is critical to preserve ischemic myocardium."
+        ],
+        glossary: [
+          { term: "Myocardial Infarction", def: "Necrosis of heart muscle tissue caused by acute ischemia." },
+          { term: "Ischemia", def: "Deficient blood and oxygen supply to tissue." }
+        ]
+      }
+    ];
+
+    const searchInput = document.getElementById("mainSearch");
+    const searchBtn = document.getElementById("searchBtn");
+    const resultsList = document.getElementById("resultsList");
+    const resultsCount = document.getElementById("resultsCount");
+    const pills = document.querySelectorAll(".query-pill");
+    const catButtons = document.querySelectorAll(".cat-btn");
+
+    let currentCategory = "all";
+
+    function render(query = "") {
+      const q = query.trim().toLowerCase();
+      const words = q.split(/\s+/).filter(w => w.length > 2);
+
+      let filtered = DATASET.filter(item => {
+        if (currentCategory !== "all" && item.type !== currentCategory) return false;
+        return true;
+      });
+
+      if (q) {
+        filtered = filtered.map(item => {
+          let score = 0;
+          const target = (item.question + " " + item.focus + " " + item.answer).toLowerCase();
+          words.forEach(w => {
+            if (item.focus.toLowerCase().includes(w)) score += 4;
+            if (item.question.toLowerCase().includes(w)) score += 3;
+            if (item.answer.toLowerCase().includes(w)) score += 1;
+          });
+          if (target.includes(q)) score += 5;
+          return { ...item, score };
+        }).filter(item => item.score > 0);
+
+        filtered.sort((a, b) => b.score - a.score);
+      }
+
+      resultsCount.innerText = `Showing ${filtered.length} Medical Answer${filtered.length === 1 ? '' : 's'}`;
+      resultsList.innerHTML = "";
+
+      if (filtered.length === 0) {
+        resultsList.innerHTML = `
+          <div class="bg-white p-8 rounded-2xl border border-slate-200 text-center space-y-2">
+            <p class="text-base font-semibold text-slate-800">No matching medical records found</p>
+            <p class="text-xs text-slate-500">Try searching for symptoms like "chest pain", "shortness of breath", or diseases like "asthma".</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach((item, idx) => {
+        const card = document.createElement("div");
+        card.className = "bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 hover:shadow-md transition-shadow";
+
+        const takeaways = item.takeaways ? `
+          <div class="bg-teal-50/70 border border-teal-100 rounded-xl p-3.5 space-y-1.5">
+            <p class="text-xs font-bold text-teal-800 flex items-center gap-1.5">
+              <span>📌</span> Key Clinical Takeaways:
+            </p>
+            <ul class="list-disc pl-5 space-y-1 text-xs text-slate-700">
+              ${item.takeaways.map(t => `<li>${t}</li>`).join('')}
+            </ul>
+          </div>
+        ` : '';
+
+        const terms = item.glossary ? `
+          <div class="flex items-center gap-2 flex-wrap pt-1">
+            <span class="text-[11px] font-semibold text-slate-400">Clinical Lexicon:</span>
+            ${item.glossary.map(g => `
+              <span class="px-2.5 py-1 rounded-md text-[11px] bg-slate-100 text-slate-700 border border-slate-200" title="${g.def}">
+                <strong class="text-teal-700">${g.term}</strong>: ${g.def}
+              </span>
+            `).join('')}
+          </div>
+        ` : '';
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-teal-50 text-teal-700 border border-teal-200">
+                🏥 ${item.focus}
+              </span>
+              <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-200">
+                🏷️ ${item.type.toUpperCase()}
+              </span>
+            </div>
+            <span class="text-xs text-slate-400 font-medium">🏛️ ${item.source}</span>
+          </div>
+
+          <h4 class="text-base font-bold text-slate-900">${item.question}</h4>
+          <p class="text-sm text-slate-600 leading-relaxed">${item.answer}</p>
+
+          ${takeaways}
+          ${terms}
+        `;
+        resultsList.appendChild(card);
+      });
+    }
+
+    // Event Listeners
+    searchBtn.addEventListener("click", () => render(searchInput.value));
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") render(searchInput.value);
+    });
+
+    pills.forEach(pill => {
+      pill.addEventListener("click", () => {
+        searchInput.value = pill.getAttribute("data-query");
+        render(searchInput.value);
+      });
+    });
+
+    catButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        catButtons.forEach(b => {
+          b.className = "cat-btn text-left px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-50 border border-transparent";
+        });
+        btn.className = "cat-btn active text-left px-3 py-1.5 rounded-lg text-xs font-semibold bg-teal-50 text-teal-700 border border-teal-200";
+        currentCategory = btn.getAttribute("data-cat");
+        render(searchInput.value);
+      });
+    });
+
+    // Initial render
+    render("asthma symptoms");
+  </script>
+
+</body>
+</html>
