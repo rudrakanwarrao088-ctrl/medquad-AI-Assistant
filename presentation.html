@@ -88,7 +88,7 @@
           <h3 class="text-lg font-bold text-teal-400 flex items-center gap-2"><span>💡</span> The MedQuAD AI Solution</h3>
           <ul class="space-y-2 text-xs sm:text-sm text-slate-300 leading-relaxed">
             <li>• <strong>NIH-Verified Ground Truth:</strong> Grounded exclusively in peer-reviewed clinical data from 12 official NIH resources.</li>
-            <li>• <strong>Hybrid Retrieval Engine:</strong> Sublinear TF-IDF + Cosine Similarity with pathological entity boosting.</li>
+            <li>• <strong>Hybrid Semantic Retrieval:</strong> Combines sublinear TF-IDF, n-gram vector matching, and clinical entity boosting for precision answers.</li>
             <li>• <strong>Patient-Centered NLP Layer:</strong> Synthesizes actionable bulleted takeaways and plain-English medical glossaries.</li>
             <li>• <strong>Clinical Safety First:</strong> Transparent similarity confidence scores and prominent HIPAA/medical disclaimers.</li>
           </ul>
@@ -96,106 +96,71 @@
       </div>
     </div>
 
-    <!-- SLIDE 3: Dataset Architecture -->
-    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 sm:p-14 shadow-2xl">
-      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-2">BENCHMARK DATA</span>
-      <h2 class="text-3xl font-extrabold text-white mb-6">MedQuAD Dataset & Institutional Provenance</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-        <div class="bg-teal-950/40 border border-teal-800/50 p-4 rounded-xl text-center">
-          <p class="text-2xl font-extrabold text-teal-400">16,359+</p>
-          <p class="text-xs text-slate-400 mt-1">Curated Q&As</p>
+    <!-- SLIDE 3: Dataset Architecture with Diagram -->
+    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl">
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-1">BENCHMARK TAXONOMY</span>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-4">MedQuAD Dataset & Institutional Taxonomy</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <div class="lg:col-span-5 space-y-3">
+          <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-4">
+            <h4 class="text-xs font-bold text-teal-400 mb-1">📊 Scale & Depth</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">16,359+ curated Q&A pairs covering 5,126 unique conditions with an average clinical length of 132 words.</p>
+          </div>
+          <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-4">
+            <h4 class="text-xs font-bold text-sky-400 mb-1">🏛️ Primary NIH Contributors</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">MedlinePlus, National Cancer Institute (Cancer.gov), CDC, NIDDK (Diabetes & Kidney), NINDS (Neurology), GARD (Rare Diseases).</p>
+          </div>
         </div>
-        <div class="bg-sky-950/40 border border-sky-800/50 p-4 rounded-xl text-center">
-          <p class="text-2xl font-extrabold text-sky-400">5,126</p>
-          <p class="text-xs text-slate-400 mt-1">Medical Diseases</p>
-        </div>
-        <div class="bg-indigo-950/40 border border-indigo-800/50 p-4 rounded-xl text-center">
-          <p class="text-2xl font-extrabold text-indigo-400">9</p>
-          <p class="text-xs text-slate-400 mt-1">NIH Institutes</p>
-        </div>
-        <div class="bg-emerald-950/40 border border-emerald-800/50 p-4 rounded-xl text-center">
-          <p class="text-2xl font-extrabold text-emerald-400">132 Words</p>
-          <p class="text-xs text-slate-400 mt-1">Avg Response Depth</p>
-        </div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-slate-800/40 border border-slate-700 rounded-xl p-5">
-          <h4 class="text-sm font-bold text-white mb-2">🏛️ Contributing Institutes</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            MedlinePlus (NLM), National Cancer Institute (Cancer.gov), Centers for Disease Control and Prevention (CDC), NIDDK (Diabetes & Kidney), NINDS (Neurological Disorders), GARD (Rare Diseases), NHLBI (Heart & Lung).
-          </p>
-        </div>
-        <div class="bg-slate-800/40 border border-slate-700 rounded-xl p-5">
-          <h4 class="text-sm font-bold text-white mb-2">🏷️ Question Typologies</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Symptoms & Signs, Treatment & Therapeutics, Causes & Risk Factors, Diagnosis & Diagnostic Testing, Prognosis & Clinical Outlook, and General Medical Inquiries.
-          </p>
+        <div class="lg:col-span-7 bg-white rounded-2xl p-2 border border-slate-700 shadow-md">
+          <img src="diagram_taxonomy.png" alt="Dataset Taxonomy Diagram" class="w-full h-auto rounded-xl object-contain max-h-[360px]" />
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 4: System Architecture -->
-    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 sm:p-14 shadow-2xl">
-      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-2">TECHNICAL PIPELINE</span>
-      <h2 class="text-3xl font-extrabold text-white mb-6">Multi-Tier System Architecture</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-        <div class="bg-slate-800/60 border border-slate-700 rounded-2xl p-5 space-y-2">
-          <span class="w-7 h-7 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center text-xs font-bold">1</span>
-          <h4 class="text-sm font-bold text-white">Data Ingestion</h4>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Auto-discovers CSV, handles UTF-8/Latin-1 encoding fallbacks, dynamic column mapping, and deduplication.
-          </p>
+    <!-- SLIDE 4: System Architecture with Flowchart Diagram -->
+    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl">
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-1">TECHNICAL PIPELINE</span>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-4">End-to-End System Architecture Flowchart</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <div class="lg:col-span-4 space-y-2.5">
+          <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-3.5">
+            <p class="text-xs font-bold text-teal-400">1. Data Ingestion</p>
+            <p class="text-[11px] text-slate-300">Auto-discovers CSV, UTF-8/Latin-1 fallbacks, dynamic column mapping.</p>
+          </div>
+          <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-3.5">
+            <p class="text-xs font-bold text-sky-400">2. TF-IDF Indexing</p>
+            <p class="text-[11px] text-slate-300">Sublinear term weights, (1, 2) n-grams, 50,000 vocab features.</p>
+          </div>
+          <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-3.5">
+            <p class="text-xs font-bold text-indigo-400">3. Hybrid Retrieval</p>
+            <p class="text-[11px] text-slate-300">Cosine similarity with +8% pathological entity boosting.</p>
+          </div>
         </div>
-        <div class="bg-slate-800/60 border border-slate-700 rounded-2xl p-5 space-y-2">
-          <span class="w-7 h-7 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-xs font-bold">2</span>
-          <h4 class="text-sm font-bold text-white">TF-IDF Indexing</h4>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Builds sublinear TF-IDF vector space with (1,2) n-grams and 50,000 clinical vocabulary features.
-          </p>
-        </div>
-        <div class="bg-slate-800/60 border border-slate-700 rounded-2xl p-5 space-y-2">
-          <span class="w-7 h-7 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs font-bold">3</span>
-          <h4 class="text-sm font-bold text-white">Hybrid Retrieval</h4>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Cosine similarity matching with +8% domain entity boosting on target diseases and condition filtering.
-          </p>
-        </div>
-        <div class="bg-slate-800/60 border border-slate-700 rounded-2xl p-5 space-y-2">
-          <span class="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold">4</span>
-          <h4 class="text-sm font-bold text-white">Delivery Layer</h4>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Streamlit reactive web application, client-side HTML dashboard, takeaway extractor, and glossary.
-          </p>
+        <div class="lg:col-span-8 bg-white rounded-2xl p-2 border border-slate-700 shadow-md">
+          <img src="diagram_architecture.png" alt="Architecture Flowchart" class="w-full h-auto rounded-xl object-contain max-h-[380px]" />
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 5: Algorithms & Mathematics -->
-    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 sm:p-14 shadow-2xl">
-      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-2">INFORMATION RETRIEVAL</span>
-      <h2 class="text-3xl font-extrabold text-white mb-6">Mathematical Formulation & Ranking</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 space-y-3">
-          <h3 class="text-base font-bold text-teal-400">📐 Sublinear TF-IDF Formulation</h3>
-          <p class="text-xs text-slate-300 leading-relaxed font-mono bg-slate-950 p-3 rounded-lg border border-slate-800">
-            tf_sub(t, d) = 1 + log(tf(t, d)) if tf > 0, else 0<br>
-            idf(t) = log((1 + N) / (1 + df(t))) + 1
-          </p>
-          <ul class="text-xs text-slate-400 space-y-1.5 pt-1">
-            <li>• Sublinear frequency prevents long medical texts from falsely dominating.</li>
-            <li>• N-gram windowing (1, 2) accurately indexes terms like <em>"blood pressure"</em>.</li>
-          </ul>
+    <!-- SLIDE 5: Mathematical Retrieval & Boosting Diagram -->
+    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl">
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-1">INFORMATION RETRIEVAL</span>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-4">Mathematical Retrieval & Boosting Flowchart</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <div class="lg:col-span-4 space-y-3">
+          <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-4 space-y-1">
+            <h4 class="text-xs font-bold text-teal-400">📐 Sublinear TF-IDF</h4>
+            <p class="text-[11px] text-slate-300 font-mono bg-slate-950 p-2 rounded">tf_sub = 1 + log(tf)<br>idf = log((1+N)/(1+df)) + 1</p>
+            <p class="text-[11px] text-slate-400">Prevents long paragraphs from distorting relevance.</p>
+          </div>
+          <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-4 space-y-1">
+            <h4 class="text-xs font-bold text-sky-400">🎯 Cosine Projection</h4>
+            <p class="text-[11px] text-slate-300 font-mono bg-slate-950 p-2 rounded">Score = Cos(Q, D) + 0.08·Boost</p>
+            <p class="text-[11px] text-slate-400">Exact condition match elevates candidate rank.</p>
+          </div>
         </div>
-        <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 space-y-3">
-          <h3 class="text-base font-bold text-sky-400">🎯 Cosine Projection & Boosting</h3>
-          <p class="text-xs text-slate-300 leading-relaxed font-mono bg-slate-950 p-3 rounded-lg border border-slate-800">
-            CosineSim(Q, D) = (Q · D) / (||Q|| · ||D||)<br>
-            Score(d) = CosineSim(Q, D) + α · EntityMatch(Q, Focus_d)
-          </p>
-          <ul class="text-xs text-slate-400 space-y-1.5 pt-1">
-            <li>• Evaluates directional angle in high-dimensional sparse vector space.</li>
-            <li>• Empirical boost factor α = 0.08 prioritizes direct disease matches.</li>
-          </ul>
+        <div class="lg:col-span-8 bg-white rounded-2xl p-2 border border-slate-700 shadow-md">
+          <img src="diagram_retrieval.png" alt="Retrieval Pipeline" class="w-full h-auto rounded-xl object-contain max-h-[380px]" />
         </div>
       </div>
     </div>
@@ -258,7 +223,7 @@
           <ul class="text-xs sm:text-sm text-slate-300 space-y-2">
             <li>• <strong>Top Documented Conditions:</strong> Breast cancer, Diabetes, Asthma, Glaucoma, Hypertension, and Parkinson's.</li>
             <li>• <strong>Deep Explanations:</strong> Average answer length of 132 words ensures comprehensive medical guidance.</li>
-            <li>• <strong>Broad Institutional Representation:</strong> Balances specialty oncology (NCI) with primary care (MedlinePlus, CDC).</li>
+            <li>• <strong>Broad Representation:</strong> Balances oncology (NCI) with primary care (MedlinePlus, CDC).</li>
           </ul>
         </div>
         <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 space-y-2.5">
@@ -272,22 +237,23 @@
       </div>
     </div>
 
-    <!-- SLIDE 9: DevOps & Deployment -->
-    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 sm:p-14 shadow-2xl">
-      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-2">DEPLOYMENT & DEVOPS</span>
-      <h2 class="text-3xl font-extrabold text-white mb-6">Cloud Infrastructure & Production Readiness</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-5 space-y-2">
-          <h4 class="text-sm font-bold text-teal-400">☁️ Streamlit Cloud</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">Direct continuous deployment from GitHub with automated SSL certificates and public URL hosting.</p>
+    <!-- SLIDE 9: DevOps with Diagram -->
+    <div class="slide flex-col w-full bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl">
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400 mb-1">PRODUCTION DEVOPS</span>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-4">Cloud Infrastructure & DevOps Flowchart</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <div class="lg:col-span-4 space-y-3">
+          <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-4">
+            <h4 class="text-xs font-bold text-teal-400 mb-1">☁️ Streamlit Cloud</h4>
+            <p class="text-xs text-slate-300">Continuous deployment directly from GitHub with SSL certificates and CDN.</p>
+          </div>
+          <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-4">
+            <h4 class="text-xs font-bold text-sky-400 mb-1">🐳 Docker Container</h4>
+            <p class="text-xs text-slate-300">Python 3.11-slim container with health probes for AWS/GCP clusters.</p>
+          </div>
         </div>
-        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-5 space-y-2">
-          <h4 class="text-sm font-bold text-sky-400">🐳 Docker Container</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">Lean Python 3.11-slim container with health check probes for AWS, GCP, Azure, or Kubernetes clusters.</p>
-        </div>
-        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-5 space-y-2">
-          <h4 class="text-sm font-bold text-indigo-400">🔄 CI/CD & Testing</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">Unit test suite (<code class="text-teal-400">test_pipeline.py</code>) validating normalization, ranking, and takeaway extraction.</p>
+        <div class="lg:col-span-8 bg-white rounded-2xl p-2 border border-slate-700 shadow-md">
+          <img src="diagram_devops.png" alt="DevOps Diagram" class="w-full h-auto rounded-xl object-contain max-h-[380px]" />
         </div>
       </div>
     </div>
@@ -325,7 +291,7 @@
           <p class="text-base font-bold text-white">Thank You! Questions & Discussion</p>
           <p class="text-xs text-teal-400">Presented by Rashi Kanwar Rao</p>
         </div>
-        <a href="https://github.com/rudrakanwarrao-088-ctrl/medquad-AI-Assistant" target="_blank" class="px-4 py-2 rounded-xl text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white transition">
+        <a href="https://github.com/rudrakanwarrao088-ctrl/medquad-AI-Assistant" target="_blank" class="px-4 py-2 rounded-xl text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white transition">
           View GitHub Repository ↗
         </a>
       </div>
